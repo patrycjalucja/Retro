@@ -102,9 +102,7 @@ public class MainActivity extends AppCompatActivity implements Lista.OverviewFra
 
 
         Intent n = new Intent(this, DetalActivity.class);
-
-
-        n.putExtra("msg", m);
+        n.putExtra("msg", arg);
         startActivity(n);
     }
 
@@ -140,18 +138,18 @@ public class MainActivity extends AppCompatActivity implements Lista.OverviewFra
     // ta metoda pochodzi z OverviewFragmentActivityListener
 
     public void onItemSelected(String msg) {
-        Detal fragment = (Detal) getFragmentManager()
+     /*   Detal fragment = (Detal) getFragmentManager()
                 .findFragmentById(R.id.detalFragment);
         // jezeli fragment istnieje w tej aktywnosci to znaczy, ze jestesmy w trybie landscape
         if (fragment != null && fragment.isInLayout()) {
             fragment.settText(msg);
-        } else {
+        } else { */
             // w trybie portrait wywolujemy druga aktywnosc
             Intent intent = new Intent(getApplicationContext(),
                     DetalActivity.class);
             intent.putExtra("msg", msg);
             startActivity(intent);
-        }
+      //  }
     }
 
 

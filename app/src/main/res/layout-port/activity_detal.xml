@@ -23,15 +23,13 @@
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal" />
 
-
-
-
-    <fragment
-        android:id="@+id/detalFragment"
+    <FrameLayout
+        android:id="@+id/fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="patrycja.retro.Detal"
-        tools:layout="@layout/detal" />
+        />
+
+
 
 </LinearLayout> 
 

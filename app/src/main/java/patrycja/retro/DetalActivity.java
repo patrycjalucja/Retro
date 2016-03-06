@@ -30,6 +30,7 @@ public class DetalActivity extends AppCompatActivity implements AsyncResponse{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detal);
        // setContentView(R.layout.activity_detal);
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -39,19 +40,21 @@ public class DetalActivity extends AppCompatActivity implements AsyncResponse{
 
         // jeżeli użytkownik będzie w orientacji landscape, należy zamknąć
         // aktywność
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+      if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             finish();
             return;
         }
 
-        setContentView(R.layout.activity_detal);
+
 
         // pobieramy dane wysłane przez aktywność główną
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String url = extras.getString("msg");
-            Detal detalFragment = (Detal) getFragmentManager()
-                    .findFragmentById(R.id.detalFragment);
+            getFragmentManager().beginTransaction().replace(R.id.fragment,
+                    new Detal()).commit();
+         /*   Detal detalFragment = (Detal) getFragmentManager()
+                    .findFragmentById(R.id.detalFragment);*/
             //String nowy = url.getText().toString();
             PostResponseAsyncTask task = new PostResponseAsyncTask(DetalActivity.this, new AsyncResponse() {
                 @Override
