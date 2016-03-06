@@ -7,5 +7,8 @@ android:layout_height="match_parent"
 android:background="#78a8d4"
 tools:context=".Detal"
 tools:showIn="@layout/activity_main">
-
+<ListView
+    android:id="@+id/listview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"></ListView>
 </RelativeLayout>

@@ -51,10 +51,8 @@ public class MainActivity extends AppCompatActivity implements Lista.OverviewFra
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         ListView listView = (ListView) findViewById(R.id.listview);
-        // items[1] = "ggg";
         arrayList = new ArrayList<String>();
         adapter = new ArrayAdapter<String>(this, R.layout.lista_item, R.id.txtitem, arrayList){
             public View getView(int position, View convertView, ViewGroup parent) {
