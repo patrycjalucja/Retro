@@ -1,22 +1,14 @@
 package patrycja.retro;
 
-import android.app.Activity;
-import android.app.Notification;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,29 +16,21 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import patrycja.retro.Detal;
-import patrycja.retro.DetalActivity;
-import patrycja.retro.Lista;
-import patrycja.retro.R;
 
 
 public class MainActivity extends AppCompatActivity implements Lista.OverviewFragmentActivityListener {
     public ArrayAdapter<String> adapter;
     public ArrayList<String> arrayList;
-    String m;
+
     public EditText txtinput;
-
-
+    //String ar = "what";
+    public ArrayList<String> lista = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +64,38 @@ public class MainActivity extends AppCompatActivity implements Lista.OverviewFra
                 adapter.notifyDataSetChanged();
                 txtinput.setText("");
 
+
+                PostResponseAsyncTask task = new PostResponseAsyncTask(MainActivity.this, new AsyncResponse() {
+                    @Override
+                    public void processFinish(String s) {
+                        try {
+                            try {
+                                lista.add(znajdzTeDane(s));
+                            } catch (StringIndexOutOfBoundsException u) {
+
+                                lista.add("");
+                                showToast("Nie ma takiego miasta");
+                            }
+                            //textView.setText(znajdzTeDane(s));
+                        } catch (NullPointerException e) {
+                            showToast(s);
+                        }
+                    }
+                });
+                try {
+                    nowy = URLEncoder.encode(nowy, "UTF-8");
+                } catch (UnsupportedEncodingException x) {
+
+                }
+                task.execute("http://maps.googleapis.com/maps/api/geocode/json?address=" + nowy + "&sensor=true");
             }
         });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                showToast("super");
-                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+
                     doDetalu(adapter.getItem(arg2));
-                }
+
 
             }
 
@@ -100,8 +107,18 @@ public class MainActivity extends AppCompatActivity implements Lista.OverviewFra
 
 
         Intent n = new Intent(this, DetalActivity.class);
-        n.putExtra("msg", arg);
-        startActivity(n);
+
+        int a = arrayList.indexOf(arg);
+        if (lista.get(a).isEmpty()) {
+
+            showToast("nie ma takiego miasta");
+            //finishActivity(n);
+        } else {
+            n.putExtra("msg", lista.get(a));
+
+
+            startActivity(n);
+        }
     }
 
     private void showToast(String string) {
@@ -151,8 +168,45 @@ public class MainActivity extends AppCompatActivity implements Lista.OverviewFra
     }
 
 
+    public String znajdzTeDane(String s) {
+        String str = "long_name";
+        String result = "";
+        for (int i = 0; i < 5; i++) {
+            int where = s.indexOf(str);
+            s = s.substring(where + 13);
+            int where2 = s.indexOf(",");
+            String temp = s.substring(1, where2 - 1);
 
 
+            switch (i) {
+                case 0: {
+                    result = result + "\n " + "Miasto: " + temp;
+                    break;
+                }
+                case 1: {
+                    result = result + "\n " + "Gmina: " + temp;
+                    break;
+                }
+                case 2: {
+                    result = result + "\n " + "Powiat: " + temp;
+                    break;
+                }
+                case 3: {
+                    result = result + "\n " + "Województwo: " + temp;
+                    break;
+                }
+                case 4: {
+                    result = result + "\n " + "Kraj: " + temp;
+                    break;
+                }
+                default:
+                    break;
+            }
 
+        }
+
+        return result;
+
+    }
 
 }

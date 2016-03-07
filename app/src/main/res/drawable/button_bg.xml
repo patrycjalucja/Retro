@@ -6,11 +6,10 @@
 
     -<shape android:shape="rectangle">
 
-    <gradient android:centerY="0.5" android:centerX="0.5" android:angle="270" android:endColor="#20c3d0" android:centerColor="#3fd0d4" android:startColor="#b9e8ea"/>
+    <gradient android:angle="270" android:centerColor="#3fd0d4" android:centerX="0.5" android:centerY="0.5" android:endColor="#20c3d0" android:startColor="#b9e8ea" />
 
-    <corners android:radius="7dp"/>
 
-    <padding android:bottom="6dp" android:right="10dp" android:top="6dp" android:left="10dp"/>
+    <padding android:bottom="6dp" android:left="10dp" android:right="10dp" android:top="6dp" />
 
 </shape>
 
@@ -22,11 +21,11 @@
 
     -<shape>
 
-    <gradient android:centerY="0.5" android:centerX="0.5" android:angle="270" android:endColor="#e7dfc6" android:centerColor="#e7dfc6" android:startColor="#a7a7a7"/>
+    <gradient android:angle="270" android:centerColor="#e7dfc6" android:centerX="0.5" android:centerY="0.5" android:endColor="#e7dfc6" android:startColor="#a7a7a7" />
 
     <corners android:radius="7dp"/>
 
-    <padding android:bottom="6dp" android:right="10dp" android:top="6dp" android:left="10dp"/>
+    <padding android:bottom="6dp" android:left="10dp" android:right="10dp" android:top="6dp" />
 
 </shape>
 
