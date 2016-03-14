@@ -16,25 +16,20 @@ import com.kosalgeek.genasync12.AsyncResponse;
 /**
  * Created by Patrycja on 2016-03-03.
  */
-public class DetalActivity extends AppCompatActivity implements AsyncResponse{
-   TextView textView;
+public class DetalActivity extends AppCompatActivity implements AsyncResponse {
+    TextView textView;
     Button back2;
-  ListView listview;
-    TextView tytul;
+    ListView listview;
+    TextView title;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detal);
-       // setContentView(R.layout.activity_detal);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-       // elementview = getView();
         textView = (TextView) findViewById(R.id.textView);
-        tytul = (TextView) findViewById(R.id.tytul);
+        title = (TextView) findViewById(R.id.title);
         back2 = (Button) findViewById(R.id.back);
         listview = (ListView) findViewById(R.id.listview);
-        // jeżeli użytkownik będzie w orientacji landscape, należy zamknąć
-        // aktywność
-      if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             finish();
             return;
         }
@@ -48,44 +43,27 @@ public class DetalActivity extends AppCompatActivity implements AsyncResponse{
             getFragmentManager().beginTransaction().replace(R.id.fragment,
                     new Detal()).commit();
             textView.setText(url);
-            tytul.setText("Opis miasta");
-         /*   Detal detalFragment = (Detal) getFragmentManager()
-                    .findFragmentById(R.id.detalFragment);*/
-            //String nowy = url.getText().toString();
-
-            //textView.setText(url);
-
+            title.setText("Opis miasta");
 
         }
     }
 
 
-
-    public void goBack(View v){
+    public void goBack(View v) {
         Intent n = new Intent(this, patrycja.retro.MainActivity.class);
         n.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(n);
-       //TODO czyści listę, usunąć to
     }
 
     private void showToast(String string) {
         Toast.makeText(this, string, Toast.LENGTH_LONG).show();
 
     }
- /*   public View getView(int position, View convertView, ViewGroup parent) {
-        // Set view in case it's null
-        View elementView = convertView;
-        if (elementView == null) {
-            elementView = getLayoutInflater().inflate(R.layout.activity_detal, parent, false);
-            Log.i("INFLATING VIEW", "true");
-        }
-        return elementView;
-    } */
-        @Override
+
+    @Override
     public void processFinish(String s) {
 
     }
-
 
 
 }

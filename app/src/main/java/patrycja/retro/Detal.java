@@ -1,4 +1,5 @@
 package patrycja.retro;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,12 +21,8 @@ public class Detal extends Fragment {
     }
 
     public void settText(String txt) {
-        //TextView view = (TextView) getView().findViewById(R.id.DetalTxt);
-        //view.setText(txt);
+
     }
-
-
-
 
 
 }

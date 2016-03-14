@@ -24,13 +24,13 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements Lista.OverviewFragmentActivityListener {
+public class MainActivity extends AppCompatActivity implements List.OverviewFragmentActivityListener {
     public ArrayAdapter<String> adapter;
     public ArrayList<String> arrayList;
-
+    String temp = "";
     public EditText txtinput;
-    //String ar = "what";
-    public ArrayList<String> lista = new ArrayList<String>();
+    public ArrayList<String> list = new ArrayList<String>();
+    private Bundle savedInstanceState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements Lista.OverviewFra
         setContentView(R.layout.activity_main);
         ListView listView = (ListView) findViewById(R.id.listview);
         arrayList = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(this, R.layout.lista_item, R.id.txtitem, arrayList){
+        adapter = new ArrayAdapter<String>(this, R.layout.lista_item, R.id.txtitem, arrayList) {
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 if (position % 2 == 1) {
@@ -59,42 +59,45 @@ public class MainActivity extends AppCompatActivity implements Lista.OverviewFra
             public void onClick(View v) {
 
 
-                String nowy = txtinput.getText().toString();
-                arrayList.add(nowy);
-                adapter.notifyDataSetChanged();
-                txtinput.setText("");
-
-
+                temp = txtinput.getText().toString();
+                String t = temp;
                 PostResponseAsyncTask task = new PostResponseAsyncTask(MainActivity.this, new AsyncResponse() {
                     @Override
                     public void processFinish(String s) {
                         try {
                             try {
-                                lista.add(znajdzTeDane(s));
+                                list.add(findData(s));
+                                arrayList.add(temp);
+                                adapter.notifyDataSetChanged();
                             } catch (StringIndexOutOfBoundsException u) {
 
-                                lista.add("");
+
                                 showToast("Nie ma takiego miasta");
                             }
-                            //textView.setText(znajdzTeDane(s));
+
                         } catch (NullPointerException e) {
                             showToast(s);
                         }
                     }
                 });
                 try {
-                    nowy = URLEncoder.encode(nowy, "UTF-8");
+                    t = URLEncoder.encode(t, "UTF-8");
                 } catch (UnsupportedEncodingException x) {
 
                 }
-                task.execute("http://maps.googleapis.com/maps/api/geocode/json?address=" + nowy + "&sensor=true");
+                task.execute("http://maps.googleapis.com/maps/api/geocode/json?address=" + t + "&sensor=true");
+
+
+                txtinput.setText("");
+
+
             }
         });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 
-                    doDetalu(adapter.getItem(arg2));
+                toDetal(adapter.getItem(arg2));
 
 
             }
@@ -103,20 +106,18 @@ public class MainActivity extends AppCompatActivity implements Lista.OverviewFra
 
     }
 
-    void doDetalu(String arg) {
+    void toDetal(String arg) {
 
 
         Intent n = new Intent(this, DetalActivity.class);
 
         int a = arrayList.indexOf(arg);
-        if (lista.get(a).isEmpty()) {
+        if (list.get(a).isEmpty()) {
 
-            showToast("nie ma takiego miasta");
-            //finishActivity(n);
+            showToast("Nie ma takiego miasta");
+
         } else {
-            n.putExtra("msg", lista.get(a));
-
-
+            n.putExtra("msg", list.get(a));
             startActivity(n);
         }
     }
@@ -125,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements Lista.OverviewFra
         Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
 
     }
+
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
@@ -159,16 +161,16 @@ public class MainActivity extends AppCompatActivity implements Lista.OverviewFra
         if (fragment != null && fragment.isInLayout()) {
             fragment.settText(msg);
         } else { */
-            // w trybie portrait wywolujemy druga aktywnosc
-            Intent intent = new Intent(getApplicationContext(),
-                    DetalActivity.class);
-            intent.putExtra("msg", msg);
-            startActivity(intent);
-      //  }
+        // w trybie portrait wywolujemy druga aktywnosc
+        Intent intent = new Intent(getApplicationContext(),
+                DetalActivity.class);
+        intent.putExtra("msg", msg);
+        startActivity(intent);
+        //  }
     }
 
 
-    public String znajdzTeDane(String s) {
+    public String findData(String s) {
         String str = "long_name";
         String result = "";
         for (int i = 0; i < 5; i++) {

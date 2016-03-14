@@ -35,7 +35,7 @@
         android:id="@+id/listaFragment"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        class="patrycja.retro.Lista"
+        class="patrycja.retro.List"
         tools:layout="@layout/lista">
     </fragment>
 </LinearLayout>
