@@ -61,7 +61,7 @@ public class List extends Fragment {
             }
         };
         listView.setAdapter(adapter);
-      //  add = (Button) getView().findViewById(R.id.add);
+      
 //       listView.setAdapter(adapter);
         add.setOnClickListener(new View.OnClickListener() {
 

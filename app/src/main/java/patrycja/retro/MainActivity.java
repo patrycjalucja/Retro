@@ -30,9 +30,6 @@ public class MainActivity extends AppCompatActivity implements List.OverviewFrag
     public void onItemSelected(String msg) {
         temp = msg;
 
-        // jeżeli fragment istnieje w tej aktywności,
-        // znaczy, że jesteśmy w trybie landscape
-
             if (new Configuration().orientation== Configuration.ORIENTATION_LANDSCAPE) {
                 Detal fragment = (Detal) getFragmentManager()
                         .findFragmentById(R.id.detalFragment);
