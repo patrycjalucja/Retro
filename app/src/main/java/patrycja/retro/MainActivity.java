@@ -21,24 +21,32 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements List.OverviewFragmentActivityListener {
   //  public static Bundle  messg = new Bundle();
     private Bundle savedInstanceState;
+    private static String temp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
     public void onItemSelected(String msg) {
-        Detal fragment = (Detal) getFragmentManager()
-                .findFragmentById(R.id.detalFragment);
+        temp = msg;
+
         // jeżeli fragment istnieje w tej aktywności,
         // znaczy, że jesteśmy w trybie landscape
-        if (fragment != null && fragment.isInLayout()) {
-            fragment.settText(msg);
+
+            if (new Configuration().orientation== Configuration.ORIENTATION_LANDSCAPE) {
+                Detal fragment = (Detal) getFragmentManager()
+                        .findFragmentById(R.id.detalFragment);
+                if (fragment != null && fragment.isInLayout()) {
+                fragment.settText(msg);
+            }
         } else {
-            // w trybie portrait wywołujemy drugą aktywność
-            Intent intent = new Intent(getApplicationContext(),
-                    DetalActivity.class);
-            intent.putExtra("msg", msg);
-            startActivity(intent);
+
+                // w trybie portrait wywołujemy drugą aktywność
+                Intent intent = new Intent(getApplicationContext(),
+                        DetalActivity.class);
+                intent.putExtra("msg", msg);
+                startActivity(intent);
+
         }
     }
 
@@ -48,7 +56,8 @@ public class MainActivity extends AppCompatActivity implements List.OverviewFrag
 
     }
 
-    public void onConfigurationChanged(Configuration newConfig) {
+   public void onConfigurationChanged(Configuration newConfig) {
+        onItemSelected(temp);
         super.onConfigurationChanged(newConfig);
     }
 

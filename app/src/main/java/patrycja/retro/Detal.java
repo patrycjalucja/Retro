@@ -2,6 +2,7 @@ package patrycja.retro;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,7 +28,6 @@ public class Detal extends Fragment {
 
         return view;
     }
-
 
     public void settText(String txt) {
         textView = (TextView) getView().findViewById(R.id.textView);

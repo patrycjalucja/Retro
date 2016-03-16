@@ -26,15 +26,21 @@ public class DetalActivity extends AppCompatActivity implements AsyncResponse {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detal);
      /*   textView = (TextView) findViewById(R.id.textView);
-        title = (TextView) findViewById(R.id.title);
-        back2 = (Button) findViewById(R.id.back); */
+        title = (TextView) findViewById(R.id.title);*/
+        back2 = (Button) findViewById(R.id.back);
     //    listview = (ListView) findViewById(R.id.listview);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             finish();
             return;
         }
         final Context context = this;
-
+            back2.setOnClickListener(new View.OnClickListener() {
+                                         @Override
+                                         public void onClick(View v) {
+                                             goBack();
+                                         }
+                                     }
+            );
 
         // pobieramy dane wysłane przez aktywność główną
         Bundle extras = getIntent().getExtras();
@@ -52,7 +58,7 @@ public class DetalActivity extends AppCompatActivity implements AsyncResponse {
     }
 
 
-    public void goBack(View v) {
+    public void goBack() {
         Intent n = new Intent(this, patrycja.retro.MainActivity.class);
         n.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(n);

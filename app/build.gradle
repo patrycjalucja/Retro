@@ -25,6 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:design:22.2.1'
     compile 'com.google.code.gson:gson:2.5'
-    compile files('libs/KGJsonConverter.jar')
     compile files('libs/GenAsync.1.2.jar')
 }
