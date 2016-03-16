@@ -19,16 +19,16 @@ import com.kosalgeek.genasync12.AsyncResponse;
 public class DetalActivity extends AppCompatActivity implements AsyncResponse {
     TextView textView;
     Button back2;
-    ListView listview;
+  //  ListView listview;
     TextView title;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detal);
-        textView = (TextView) findViewById(R.id.textView);
+     /*   textView = (TextView) findViewById(R.id.textView);
         title = (TextView) findViewById(R.id.title);
-        back2 = (Button) findViewById(R.id.back);
-        listview = (ListView) findViewById(R.id.listview);
+        back2 = (Button) findViewById(R.id.back); */
+    //    listview = (ListView) findViewById(R.id.listview);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             finish();
             return;
@@ -40,10 +40,13 @@ public class DetalActivity extends AppCompatActivity implements AsyncResponse {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String url = extras.getString("msg");
-            getFragmentManager().beginTransaction().replace(R.id.fragment,
-                    new Detal()).commit();
-            textView.setText(url);
-            title.setText("Opis miasta");
+            Detal detalFragment = (Detal) getFragmentManager()
+                    .findFragmentById(R.id.detalFragment);
+          /* getFragmentManager().beginTransaction().replace(R.id.fragment,
+                    new Detal()).commit(); */
+            detalFragment.settText(url);
+//            textView.setText(url);
+  //          title.setText("Opis miasta");
 
         }
     }

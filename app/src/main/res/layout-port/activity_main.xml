@@ -6,31 +6,7 @@
     android:baselineAligned="false"
     android:background="#518fc8"
     android:orientation="vertical" >
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#f999"
-        android:orientation="vertical" >
 
-
-        <EditText
-            android:id="@+id/txtinput"
-            android:layout_height="wrap_content"
-            android:layout_width="300dp"
-            android:hint="Wpisz miasto"
-            />
-        <Button
-            android:id="@+id/add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dodaj"
-            android:background="@drawable/button_bg"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
-
-
-
-    </RelativeLayout>
     <fragment
         android:id="@+id/listaFragment"
         android:layout_width="wrap_content"

@@ -23,7 +23,6 @@
 
     <gradient android:angle="270" android:centerColor="#e7dfc6" android:centerX="0.5" android:centerY="0.5" android:endColor="#e7dfc6" android:startColor="#a7a7a7" />
 
-    <corners android:radius="7dp"/>
 
     <padding android:bottom="6dp" android:left="10dp" android:right="10dp" android:top="6dp" />
 
