@@ -61,8 +61,8 @@ public class List extends Fragment {
             }
         };
         listView.setAdapter(adapter);
-      
-//       listView.setAdapter(adapter);
+
+
         add.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
