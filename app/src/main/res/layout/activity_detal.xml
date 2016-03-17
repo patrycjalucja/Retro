@@ -1,12 +1,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <fragment
         android:id="@+id/detalFragment"
+        class="patrycja.retro.Detal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        class="patrycja.retro.Detal" />
+        android:layout_height="match_parent" />
 
 </LinearLayout> 
